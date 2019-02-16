@@ -10,12 +10,12 @@ Setting up OpenVPN seemed much harder than it should have for such a fundamental
 Here is the stack:
 
 Windows Server: (static-ish IP or DynDNS)
-- bitcoin full node
+- [bitcoin](https://openvpn.net/community-downloads/) full node
 - lnd (lighting node)
-- OpenVPN 
+- [OpenVPN](https://openvpn.net/community-downloads/)
 
 iOS iPhone
-- OpenVPN connect
+- [OpenVPN connect](https://itunes.apple.com/us/app/openvpn-connect/id590379981?mt=8)
 - [Zap](https://github.com/LN-Zap/zap-iOS)
 
 ## Steps:
