@@ -36,10 +36,12 @@ After you set the server up you need to run OpenVPN connect on your phone, email
 ### Step 2.1: Configure LND.conf
 In the node launcher's advanced page there is a link to the lnd.conf file. Open the file and add these lines for each IP you need:
 
-> externalip=yourNetworkAdaperIPaddress
-> tlsextraip=yourNetworkAdaperIPaddress
-> restlisten=yourNetworkAdaperIPaddress:8080 
-> rpclisten=yourNetworkAdaperIPaddress:10009
+```
+externalip=yourNetworkAdaperIPaddress
+tlsextraip=yourNetworkAdaperIPaddress
+restlisten=yourNetworkAdaperIPaddress:8080
+rpclisten=yourNetworkAdaperIPaddress:10009
+```
 
 Note that you don't need to put your public IP here becasue on the VPN your phone will address the local IP of your servers network adapter.
 
@@ -67,4 +69,3 @@ So the first time i set this up I kept getting TLS handshake erros but then an h
 
 **Some other helpful tutorials:**
 - https://ln-zap.github.io/zap-tutorials/
-- 
