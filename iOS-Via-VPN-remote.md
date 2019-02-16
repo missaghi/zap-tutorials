@@ -18,22 +18,22 @@ iOS iPhone
 - OpenVPN connect
 - [Zap](https://github.com/LN-Zap/zap-iOS)
 
-### Steps:
+## Steps:
 0. Run [Pierre's Lightning Node Launcher](https://medium.com/lightning-power-users/easy-lightning-with-node-launcher-zap-488133edfbd) to setup bitcoin node and lighting node.
 1. Setup VPN between your node and phone (openVPN with static IP or DynDNS or mediated like Hamachi)
-2. Configure LND for externalIP
+2. Configure LND for listening on your network adapter IP
 3. Create Zap connection text using LNDConnect or Node launcher's "Show QR" button when it's ready"
-4. Test it out with this invoice (sends me a coffee): lightning:lnbc1m1pw97ykwpp5jry9xzz9qxens0e9va72p6ek0j78wmupcrxy4zcgn0l37g650ursdpg2djhgatsypdxzupqv9hxggzvfezzqen0wgs9v5zwcqzysnqrz3q0km07rk6mev5u07dj4fcp99us0gafl2r2pq2u9hp064vtssy93mzyl547l7z60xp8xmmn8ql8vgfcvcpyhmu6xsc3ukyds8jgpuhq4p4
+4. Test it out by sending a tip: https://tippin.me/@missaghi
 
-#### Step 0: [Run the node launcher](https://medium.com/lightning-power-users/easy-lightning-with-node-launcher-zap-488133edfbd)
+### Step 0: [Run the node launcher](https://medium.com/lightning-power-users/easy-lightning-with-node-launcher-zap-488133edfbd)
 
-#### Step 1: OpenVPN
+### Step 1: OpenVPN
 [Setting up OpenVPN](https://www.reddit.com/r/OpenVPN/comments/81q2q6/guide_how_to_set_up_openvpn_server_on_windows_10/)
 * I forgot to click on the EasyRSA button so I didn't get the scripts but you can also get EasyRSA from [github repo](https://github.com/OpenVPN/easy-rsa/releases) and when you run .\EasyRSA-Start.bat it will give you shell where you can type ./easyrsa and run similar scripts.
 
 After you set the server up you need to run OpenVPN connect on your phone, email the config file to yourself and open in the ios default mail app (gmail app didn't handle the attachment correctly).
 
-####Step 2.1: Configure LND.conf
+### Step 2.1: Configure LND.conf
 In the node launcher's advanced page there is a link to the lnd.conf file. Open the file and add these lines for each IP you need:
 
 > externalip=yourNetworkAdaperIPaddress
@@ -43,17 +43,17 @@ In the node launcher's advanced page there is a link to the lnd.conf file. Open 
 
 Note that you don't need to put your public IP here becasue on the VPN your phone will address the local IP of your servers network adapter.
 
-#### Step 2.2: Recreate tls.key and tls.cert
+## Step 2.2: Recreate tls.key and tls.cert
 
 In the smae folder as lnd.conf you can delete the file tls.cert and tls.key, then restart LND, this will let LND create a new cert with "subject alt names" that include the IP addresses that you added.
 
-#### Step 3: Configure Zap
+## Step 3: Configure Zap
 In order for Zap to work it needs the URL, certificate, and macaroon from LND. The cert enables a TLS connection, the Macaroon is the credentials to control the node. There are two ways to get this info into ZAP, one is by pasting the connection string scanning a QR code representaion of it. 
 
-##### Step 3 Option 1, lndconnect to generate QR and URI
+### Step 3 Option 1, lndconnect to generate QR and URI
 You can creat the QR code by using [LNDConnect](https://github.com/LN-Zap/lndconnect) which will generate the text and QR code. I tried to install go and run the first command in the instructions "go get -d github.com/LN-Zap/lndconnect" but nothing happened... if you know go language better then this would be the most future proof option.
 
-##### Step 3 Option 2, Run node script to generate URI
+### Step 3 Option 2, Run node script to generate URI
 The other option is to run a node script that builds the URI specified [here](https://github.com/LN-Zap/lndconnect/blob/master/lnd_connect_uri.md), but this may not be backwards compatible.
 
 1. install [node.js](https://nodejs.org/en/download/)
@@ -62,7 +62,7 @@ The other option is to run a node script that builds the URI specified [here](ht
 4. Run without debugging (you may have to correct the path to your macaroon and cert, check the node launcher for those.)
 5. open the file created in the same folder ass app.js called lnd.txt and paste the contents into the app.
 
-#### Step 4: Hope and pray
+## Step 4: Hope and pray
 So the first time i set this up I kept getting TLS handshake erros but then an hour later it worked, probably cache, haven't been able to recreate but now you knoew... I think LND needs some tweaks to it's cert generation to work better with externalIP which i think is coming in the next version (see this issue: https://github.com/lightningnetwork/lnd/issues/684)
 
 **Some other helpful tutorials:**
