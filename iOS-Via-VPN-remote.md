@@ -64,8 +64,10 @@ The other option is to run a node script that builds the URI specified [here](ht
 4. Run without debugging (you may have to correct the path to your macaroon and cert, check the node launcher for those.)
 5. open the file created in the same folder ass app.js called lnd.txt and paste the contents into the app.
 
-## Step 4: Hope and pray
+## Step 4: Hope and then test
 So the first time i set this up I kept getting TLS handshake erros but then an hour later it worked, probably cache, haven't been able to recreate but now you knoew... I think LND needs some tweaks to it's cert generation to work better with externalIP which i think is coming in the next version (see this issue: https://github.com/lightningnetwork/lnd/issues/684)
+
+If it works, try it out by buying me coffee: https://tippin.me/@missaghi
 
 **Some other helpful tutorials:**
 - https://ln-zap.github.io/zap-tutorials/
