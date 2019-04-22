@@ -33,6 +33,13 @@ iOS iPhone
 
 After you set the server up you need to run OpenVPN connect on your phone, email the config file to yourself and open in the ios default mail app (gmail app didn't handle the attachment correctly).
 
+If you would like to exclude all traffic except to your node from the VPN (performance reasons usually) you can add these line to the server.OVPN file:
+
+```
+route-nopull 
+route yourNetworkAdaperIPaddress 255.255.255.255
+```
+
 ### Step 2.1: Configure LND.conf
 In the node launcher's advanced page there is a link to the lnd.conf file. Open the file and add these lines for each IP you need:
 
@@ -52,6 +59,8 @@ In the smae folder as lnd.conf you can delete the file tls.cert and tls.key, the
 ## Step 3: Configure Zap
 In order for Zap to work it needs the URL, certificate, and macaroon from LND. The cert enables a TLS connection, the Macaroon is the credentials to control the node. There are two ways to get this info into ZAP, one is by pasting the connection string scanning a QR code representaion of it. 
 
+Update: now Zap Desktop will generate a settings QR using LNDConnect. Click on the QR code icon at the top left of the app and then select lndconnect.
+
 ### Step 3 Option 1, lndconnect to generate QR and URI
 You can creat the QR code by using [LNDConnect](https://github.com/LN-Zap/lndconnect) which will generate the text and QR code. I tried to install go and run the first command in the instructions "go get -d github.com/LN-Zap/lndconnect" but nothing happened... if you know go language better then this would be the most future proof option.
 
@@ -64,10 +73,7 @@ The other option is to run a node script that builds the URI specified [here](ht
 4. Run without debugging (you may have to correct the path to your macaroon and cert, check the node launcher for those.)
 5. open the file created in the same folder ass app.js called lnd.txt and paste the contents into the app.
 
-## Step 4: Hope and then test
-So the first time i set this up I kept getting TLS handshake erros but then an hour later it worked, probably cache, haven't been able to recreate but now you knoew... I think LND needs some tweaks to it's cert generation to work better with externalIP which i think is coming in the next version (see this issue: https://github.com/lightningnetwork/lnd/issues/684)
+## Step 4: Certificate isssues
+So the first time i set this up I kept getting TLS handshake errors but then an hour later it worked. You may need to go to the section "Certificates for remote usage (RaspiBolt tutorial)" at the [ZAP remote node setup tutorial](https://ln-zap.github.io/zap-tutorials/iOS-remote-node-setup)
 
-If it works, try it out by buying me coffee: https://tippin.me/@missaghi
-
-**Some other helpful tutorials:**
-- https://ln-zap.github.io/zap-tutorials/
+Congrats!
